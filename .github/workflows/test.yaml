@@ -48,16 +48,22 @@ jobs:
             {
               "issues": "write"
             }
-      - run: echo "$GITHUB_HEAD_REF" > "$ARTIFACT_NAME"
+      - run: echo "$METADATA" > "${ARTIFACT_NAME}.json"
         if: steps.files.outputs.value != ''
         env:
           ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
+          METADATA: |
+            {
+              "pull_request": {
+                "number": "${{ github.event.number }}"
+              }
+            }
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         if: steps.files.outputs.value != ''
         with:
           name: ${{steps.artifact-name.outputs.value}}
           path: ${{ steps.files.outputs.value }}
-      - run: rm "$ARTIFACT_NAME"
+      - run: rm "${ARTIFACT_NAME}.json"
         if: steps.files.outputs.value != ''
         env:
           ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
