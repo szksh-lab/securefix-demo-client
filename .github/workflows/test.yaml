@@ -86,8 +86,8 @@ jobs:
             -R "${GITHUB_REPOSITORY_OWNER}/autofix" \
             "$ARTIFACT_NAME" \
             --description "$GITHUB_REPOSITORY/${GITHUB_RUN_ID}"
-      - if: steps.files.outputs.value != ''
-        run: sleep 1
+      # - if: steps.files.outputs.value != ''
+      #   run: sleep 1
       - if: steps.files.outputs.value != ''
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
@@ -97,3 +97,10 @@ jobs:
             -R "${GITHUB_REPOSITORY_OWNER}/autofix" \
             --yes \
             "$ARTIFACT_NAME"
+      - if: steps.files.outputs.value != ''
+        env:
+          FILES: ${{ steps.files.outputs.value }}
+        run: |
+          echo "::error:: Changes detected. A commit will be pushed"
+          git ls-files --modified --others --exclude-standard
+          exit 1
