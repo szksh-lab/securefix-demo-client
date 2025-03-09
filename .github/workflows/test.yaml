@@ -13,8 +13,9 @@ jobs:
           persist-credentials: false
       - run: |
           echo "foo" > foo.txt
-          mkdir bar
+          mkdir -p bar
           echo "bar" > bar/bar.txt
+          echo "zoo" > zoo.txt
 
       - id: artifact-name
         run: |
