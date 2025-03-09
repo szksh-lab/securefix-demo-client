@@ -1,0 +1,72 @@
+---
+name: test
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - run: |
+          echo "foo" > foo.txt
+          mkdir bar
+          echo "bar" > bar/bar.txt
+
+      - id: files
+        run: |
+          FILES=$(git ls-files --modified --others --exclude-standard)
+          if [ -z "$FILES" ]; then
+            echo "::notice:: No changes" >&2
+            exit 0
+          fi
+          {
+            echo 'value<<EOF'
+            echo "$FILES"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        if: steps.files.outputs.value != ''
+        id: token
+        with:
+          app_id: ${{secrets.AUTOFIX_TRIGGER_APP_ID}}
+          private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          repositories: >-
+            ["autofix"]
+          permissions: >-
+            {
+              "issues": "write"
+            }
+      - id: artifact-name
+        if: steps.files.outputs.value != ''
+        run: |
+          value=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 32)
+          echo "value=autofix-${value}" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+        if: steps.files.outputs.value != ''
+        with:
+          name: ${{steps.artifact-name.outputs.value}}
+          path: ${{ steps.files.outputs.value }}
+      - if: steps.files.outputs.value != ''
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
+        run: |
+          gh label create \
+            -R "${GITHUB_REPOSITORY_OWNER}/autofix" \
+            "$ARTIFACT_NAME" \
+            --description "$GITHUB_REPOSITORY/${GITHUB_RUN_ID}"
+      - if: steps.files.outputs.value != ''
+        run: seep 1
+      - if: steps.files.outputs.value != ''
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
+        run: |
+          gh label delete \
+            -R "${GITHUB_REPOSITORY_OWNER}/autofix" \
+            --yes \
+            "$ARTIFACT_NAME"
