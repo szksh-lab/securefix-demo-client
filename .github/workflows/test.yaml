@@ -60,7 +60,7 @@ jobs:
             "$ARTIFACT_NAME" \
             --description "$GITHUB_REPOSITORY/${GITHUB_RUN_ID}"
       - if: steps.files.outputs.value != ''
-        run: seep 1
+        run: sleep 1
       - if: steps.files.outputs.value != ''
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
