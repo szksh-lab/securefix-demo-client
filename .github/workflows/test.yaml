@@ -33,8 +33,6 @@ jobs:
           {
             echo 'value<<EOF'
             echo "$FILES"
-            echo "${ARTIFACT_NAME}.json"
-            echo "${ARTIFACT_NAME}_files.txt"
             echo EOF
           } >> "$GITHUB_OUTPUT"
       - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
@@ -68,7 +66,10 @@ jobs:
         if: steps.files.outputs.value != ''
         with:
           name: ${{steps.artifact-name.outputs.value}}
-          path: ${{ steps.files.outputs.value }}
+          path: |
+            ${{ steps.files.outputs.value }}
+            ${{steps.artifact-name.outputs.value}}.json
+            ${{steps.artifact-name.outputs.value}}_files.txt
       - run: rm "${ARTIFACT_NAME}.json" "${ARTIFACT_NAME}_files.txt"
         if: steps.files.outputs.value != ''
         env:
