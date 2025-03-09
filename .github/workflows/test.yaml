@@ -58,12 +58,17 @@ jobs:
                 "number": "${{ github.event.number }}"
               }
             }
+      - run: echo "$FILES" > "${ARTIFACT_NAME}_files.txt"
+        if: steps.files.outputs.value != ''
+        env:
+          ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
+          FILES: ${{ steps.files.outputs.value }}
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         if: steps.files.outputs.value != ''
         with:
           name: ${{steps.artifact-name.outputs.value}}
           path: ${{ steps.files.outputs.value }}
-      - run: rm "${ARTIFACT_NAME}.json"
+      - run: rm "${ARTIFACT_NAME}.json" "${ARTIFACT_NAME}_files.txt"
         if: steps.files.outputs.value != ''
         env:
           ARTIFACT_NAME: ${{ steps.artifact-name.outputs.value }}
