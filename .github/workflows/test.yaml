@@ -32,7 +32,7 @@ jobs:
         if: steps.files.outputs.value != ''
         id: token
         with:
-          app_id: ${{secrets.AUTOFIX_TRIGGER_APP_ID}}
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           repositories: >-
             ["autofix"]
