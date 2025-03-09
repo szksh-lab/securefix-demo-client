@@ -15,7 +15,10 @@ jobs:
           echo "foo" > foo.txt
           mkdir -p bar
           echo "bar" > bar/bar.txt
-          echo "zoo" > zoo.txt
+          # echo "zoo" > zoo.txt
+          if [ -f zoo.txt ]; then
+            rm zoo.txt
+          fi
 
       - id: artifact-name
         run: |
