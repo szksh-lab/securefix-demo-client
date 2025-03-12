@@ -20,7 +20,7 @@ jobs:
           #   mv foo.txt zoo.txt
           # fi
 
-      - uses: szksh-lab/securefix-client@main
+      - uses: szksh-lab/securefix@main
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
