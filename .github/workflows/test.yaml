@@ -16,9 +16,9 @@ jobs:
           mkdir -p bar
           echo "bar" > bar/bar.txt
           # echo "zoo" > zoo.txt
-          # if [ -f foo.txt ]; then
-          #   mv foo.txt zoo.txt
-          # fi
+          if [ -f foo.txt ]; then
+            mv foo.txt zoo.txt
+          fi
 
       - uses: szksh-lab/securefix@main
         with:
