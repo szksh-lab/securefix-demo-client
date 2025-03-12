@@ -12,7 +12,7 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          echo "zoo" > foo.txt
+          echo "yoo" > foo.txt
           mkdir -p bar
           echo "bar" > bar/bar.txt
           # echo "zoo" > zoo.txt
@@ -25,3 +25,4 @@ jobs:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
+          commit_message: Hello
