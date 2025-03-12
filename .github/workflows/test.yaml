@@ -1,6 +1,7 @@
 ---
 name: securefix
-on: push
+# on: push
+on: pull_request
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -12,7 +13,7 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          echo "yoo" > foo.txt
+          echo "zoo" > foo.txt
           mkdir -p bar
           echo "bar" > bar/bar.txt
           # echo "zoo" > zoo.txt
