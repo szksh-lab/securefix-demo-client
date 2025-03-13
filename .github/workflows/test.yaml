@@ -13,7 +13,7 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          echo "zoo" > foo.txt
+          echo "foo" > foo.txt
           mkdir -p bar
           echo "bar" > bar/bar.txt
           # echo "zoo" > zoo.txt
