@@ -20,3 +20,4 @@ jobs:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
+          branch: test-2
