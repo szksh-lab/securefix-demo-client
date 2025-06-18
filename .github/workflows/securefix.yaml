@@ -22,7 +22,7 @@ jobs:
           server_repository: securefix-demo-server
           repository: szksh-lab/test-delete-branch
           branch: test-2
-          pull_request_title: Test pr/123 (2)
+          pull_request_title: Test pr/123 (3)
           pull_request_base_branch: main
           pull_request_body: Yo
           pull_request_draft: true
@@ -30,4 +30,6 @@ jobs:
             suzuki-shunsuke
           pull_request_reviewers: |
             suzuki-shunsuke
+          pull_request_team_reviewers: |
+            sre
           pull_request_comment: Hello, @suzuki-shunsuke
