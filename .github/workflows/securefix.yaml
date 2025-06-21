@@ -20,8 +20,8 @@ jobs:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
-          # repository: szksh-lab/test-delete-branch
-          # branch: test-2
+          repository: szksh-lab/test-delete-branch
+          branch: test-2
           # pull_request_title: Test pr/123 (3)
           # pull_request_base_branch: main
           # pull_request_body: Yo
