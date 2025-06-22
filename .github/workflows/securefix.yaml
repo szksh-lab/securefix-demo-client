@@ -13,7 +13,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo yoo > zoo.txt
+      - run: |
+          echo yoo > zoo.txt
+          echo yoo > foo.txt
 
       - uses: csm-actions/securefix-action@pr/123
         with:
@@ -21,7 +23,7 @@ jobs:
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
           files: |
-            README.md
+            zoo.txt
           repository: szksh-lab/test-delete-branch
           branch: test-2
           pull_request_title: Test pr/123 (3)
