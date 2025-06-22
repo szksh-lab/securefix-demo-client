@@ -1,0 +1,42 @@
+---
+name: securefix
+# on: push
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - run: |
+          echo yoo > zoo.txt
+          echo yoo > foo.txt
+
+      - uses: csm-actions/securefix-action@pr/123
+        with:
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          server_repository: securefix-demo-server
+          files: |
+            zoo.txt
+          repository: szksh-lab/test-delete-branch
+          branch: test-2
+          pull_request_title: Test pr/123 (3)
+          pull_request_base_branch: main
+          pull_request_body: Yo
+          pull_request_draft: true
+          pull_request_assignees: |
+            suzuki-shunsuke
+          pull_request_reviewers: |
+            suzuki-shunsuke
+          pull_request_team_reviewers: |
+            sre
+          pull_request_labels: |
+            enhancement
+            yo
+          pull_request_comment: Hello, @suzuki-shunsuke
