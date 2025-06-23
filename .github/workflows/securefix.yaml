@@ -18,9 +18,9 @@ jobs:
           aqua_version: v2.53.3
 
       - uses: aquaproj/update-checksum-action@feat-support-securefix-action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # with:
-        #   securefix_action_server_repository: securefix-demo-server
-        #   securefix_action_app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-        #   securefix_action_app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          securefix_action_server_repository: securefix-demo-server
+          securefix_action_app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          securefix_action_app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
