@@ -1,0 +1,26 @@
+---
+name: securefix
+# on: push
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: aquaproj/aqua-installer@9ebf656952a20c45a5d66606f083ff34f58b8ce0 # v4.0.0
+        with:
+          aqua_version: v2.53.3
+
+      - uses: aquaproj/update-checksum-action@feat-support-securefix-action
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          securefix_action_server_repository: securefix-demo-server
+          securefix_action_app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          securefix_action_app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
