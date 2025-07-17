@@ -16,6 +16,6 @@ jobs:
 
       - uses: csm-actions/securefix-action@6511e4f1b7e45024bae62c3f886303a1d3ae3773 # v0.1.1-1
         with:
-          app_id: ${{vars.DEMO_CLIENT_APP_ID}}
-          app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
-          server_repository: demo-server
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          server_repository: securefix-demo-server
