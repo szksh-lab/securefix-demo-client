@@ -18,7 +18,7 @@ jobs:
           echo "$date" > date.txt
           echo "value=$date" >> "$GITHUB_OUTPUT"
 
-      - uses: csm-actions/securefix-action@pr/123
+      - uses: csm-actions/securefix-action@6511e4f1b7e45024bae62c3f886303a1d3ae3773 # v0.1.1-1
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
