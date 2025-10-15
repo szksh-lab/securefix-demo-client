@@ -1,7 +1,7 @@
 ---
 name: securefix
 # on: push
-on: pull_request
+on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -13,8 +13,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: npm i -g prettier
-      - run: prettier -w .
+      - run: echo foo > foo.txt
 
       - uses: csm-actions/securefix-action@05036cda4e1fcaeba401d23261056048fe20ba27 # v0.2.2
         with:
@@ -22,3 +21,6 @@ jobs:
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
           branch: test-4
+          pull_request_title: Title
+          pull_request_base_branch: main
+          milestone_number: 1
