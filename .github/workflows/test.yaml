@@ -23,4 +23,4 @@ jobs:
           branch: test-4
           pull_request_title: Title
           pull_request_base_branch: develop
-          automerge: "true"
+          automerge_method: "squash"
