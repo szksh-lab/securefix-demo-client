@@ -13,7 +13,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
+      - run: echo bar > foo.txt
 
       - uses: csm-actions/securefix-action@pr/317
         with:
@@ -23,4 +23,4 @@ jobs:
           branch: test-4
           pull_request_title: Title
           pull_request_base_branch: develop
-          automerge_method: "squash"
+          # automerge_method: "squash"
