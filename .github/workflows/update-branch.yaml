@@ -12,6 +12,6 @@ jobs:
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
-          server_repository: securefix-demo-server
+          server_repository_name: securefix-demo-server
           pull_request_number: 33
 
