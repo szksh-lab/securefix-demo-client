@@ -8,7 +8,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: csm-actions/update-branch-action@pr/139
+      - uses: csm-actions/update-branch-action@latest
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
