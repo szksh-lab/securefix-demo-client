@@ -8,10 +8,10 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: csm-actions/update-branch-action@pr/137
+      - uses: csm-actions/update-branch-action@pr/139
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository_name: securefix-demo-server
-          pull_request_number: 33
+          pull_request_number: "[34,35]"
 
