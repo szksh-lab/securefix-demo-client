@@ -13,7 +13,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foooo > foo.txt
+      - run: echo fooo > foo.txt
 
       - uses: csm-actions/securefix-action@pr/337
         with:
@@ -23,6 +23,6 @@ jobs:
           branch: test-4
           pull_request_title: Title
           pull_request_base_branch: main
-          automerge_method: squash
-          project_owner: szksh-lab
-          project_number: 1
+          # automerge_method: squash
+          # project_owner: szksh-lab
+          # project_number: 1
