@@ -13,12 +13,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
+      - run: echo fooo > foo.txt
 
       - uses: csm-actions/securefix-action@pr/337
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
+          branch: test-4
           # pull_request_title: Title
           # pull_request_base_branch: develop
