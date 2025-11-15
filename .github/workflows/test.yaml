@@ -1,7 +1,7 @@
 ---
 name: securefix
-# on: push
-on: workflow_dispatch
+on: pull_request
+# on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -15,11 +15,22 @@ jobs:
 
       - run: echo foo > foo.txt
 
-      - uses: csm-actions/securefix-action@pr/309
+      - uses: csm-actions/securefix-action@pr/339
         with:
+          action: client
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
           branch: test-4
           pull_request_title: Title
-          pull_request_base_branch: develop
+          pull_request_labels: |
+            bug
+          pull_request_assignees: suzuki-shunsuke
+          pull_request_reviewers: suzuki-shunsuke
+          pull_request_team_reviewers: sre
+          pull_request_comment: Hello
+          pull_request_base_branch: main
+          automerge_method: squash
+          project_owner: szksh-lab
+          # project_number: 1
+          project_id: PVT_kwDOCabuec4AlJMy
