@@ -13,7 +13,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo fooo > foo.txt
+      - run: echo foo > foo.txt
 
       - uses: csm-actions/securefix-action@pr/339
         with:
