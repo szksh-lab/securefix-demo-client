@@ -23,10 +23,14 @@ jobs:
           server_repository: securefix-demo-server
           branch: test-4
           pull_request_title: Title
-          pull_request_labels: enhancement,bug
+          pull_request_labels: |
+            enhancement
+            bug
           pull_request_assignees: suzuki-shunsuke
           pull_request_reviewers: suzuki-shunsuke
+          pull_request_comment: Hello
           pull_request_base_branch: main
           automerge_method: squash
           project_owner: szksh-lab
-          project_number: 1
+          # project_number: 1
+          project_id: PVT_kwDOCabuec4AlJMy
