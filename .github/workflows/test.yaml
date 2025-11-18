@@ -15,10 +15,10 @@ jobs:
 
       - run: echo foo > foo.txt
 
-      # - uses: csm-actions/securefix-action@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
-      - uses: csm-actions/securefix-action@pr/339
+      - uses: csm-actions/securefix-action@4f3e711a06d7d5a3f5527cc622f6c75362fec74b # v0.3.6
+      # - uses: csm-actions/securefix-action@pr/339
         with:
-          action: client
+          # action: client
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
