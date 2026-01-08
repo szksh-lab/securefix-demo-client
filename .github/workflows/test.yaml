@@ -22,7 +22,7 @@ jobs:
       - run: mkdir securefix-demo-client-2/foo
       - run: echo foooooo > securefix-demo-client-2/foo/foo.txt
 
-      - uses: csm-actions/securefix-action@7631c011cad178ac45d0580119ab838c97af6908 # v0.3.2
+      - uses: csm-actions/securefix-action@pr/426
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
