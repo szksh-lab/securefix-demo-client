@@ -20,7 +20,7 @@ jobs:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
-          branch: "bump-version"
+          branch: update-date-1
           commit_message: "Bump version"
           pull_request_base_branch: "main"
           pull_request_title: "Bump version"
