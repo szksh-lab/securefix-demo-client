@@ -24,6 +24,7 @@ jobs:
 
       - uses: csm-actions/securefix-action@pr/426
         with:
+          action: client
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
