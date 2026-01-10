@@ -1,0 +1,20 @@
+---
+name: Approve pull requests
+run-name: Approve pull requests (${{github.event.issue.number}})
+on: issue_comment
+jobs:
+  approve:
+    name: Approve a pull request (${{github.event.issue.number}})
+    runs-on: ubuntu-24.04
+    if: github.event.issue.pull_request && github.event.comment.body == '/approve'
+    timeout-minutes: 10
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - uses: securefix-action/approve-pr-action@pr/197
+        with:
+          pull_request_number: ${{ github.event.issue.number }}
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          server_repository_name: securefix-demo-server
