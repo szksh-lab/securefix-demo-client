@@ -13,13 +13,25 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
+      # - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      #   with:
+      #     repository: szksh-lab/securefix-demo-client-2
+      #     persist-credentials: false
+      #     path: securefix-demo-client-2
 
-      - uses: csm-actions/securefix-action@pr/309
+      - run: mkdir -p foo
+      - run: echo foooooo > foo/foo.txt
+
+      - uses: csm-actions/securefix-action@pr/426
         with:
+          action: client
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository: securefix-demo-server
-          branch: test-4
-          pull_request_title: Title
-          pull_request_base_branch: develop
+          # repository: szksh-lab/securefix-demo-client-2
+          # root_dir: securefix-demo-client-2
+          branch: update-date-1
+          commit_message: "Bump version"
+          pull_request_base_branch: "main"
+          pull_request_title: "Bump version"
+          pull_request_body: "Bump version"
