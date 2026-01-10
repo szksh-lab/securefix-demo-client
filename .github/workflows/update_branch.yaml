@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: csm-actions/update-branch-action@pr/208
         with:
-          app_id: ${{vars.DEMO_CLIENT_APP_ID}}
-          app_private_key: ${{secrets.DEMO_CLIENT_PRIVATE_KEY}}
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
           server_repository_name: securefix-demo-server
