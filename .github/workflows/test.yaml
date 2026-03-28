@@ -1,7 +1,7 @@
 ---
 name: securefix
 # on: push
-on: workflow_dispatch
+on: pull_request
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -9,17 +9,13 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
-
-      - uses: csm-actions/securefix-action@pr/309
+      - uses: suzuki-shunsuke/pinact-action@pr/854
         with:
-          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
-          server_repository: securefix-demo-server
-          branch: test-4
-          pull_request_title: Title
-          pull_request_base_branch: develop
+          skip_push: true
+          # securefix_app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          # securefix_app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          # securefix_server_repository: securefix-demo-server
