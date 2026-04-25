@@ -16,7 +16,7 @@ jobs:
 
       - run: rm foo.txt
 
-      - uses: csm-actions/securefix-action@pr/566
+      - uses: csm-actions/securefix-action@latest
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
