@@ -1,0 +1,15 @@
+---
+name: Update pull request branch by pull request comment
+on: issue_comment
+jobs:
+  update_branch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions: {}
+    if: github.event.issue.pull_request && contains(fromJSON('["/update-branch", "/ub"]'), github.event.comment.body)
+    steps:
+      - uses: csm-actions/update-branch-action@pr/208
+        with:
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          server_repository_name: securefix-demo-server
