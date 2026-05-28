@@ -1,0 +1,16 @@
+---
+name: update branch
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: csm-actions/update-branch-action@latest
+        with:
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          server_repository_name: securefix-demo-server
+          pull_request_number: 36
