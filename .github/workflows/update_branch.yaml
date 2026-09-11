@@ -5,11 +5,14 @@ jobs:
   update_branch:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    permissions: {}
+    permissions:
+      # Required to assume the AWS IAM role that signs the GitHub App JWT with KMS
+      id-token: write
     if: github.event.issue.pull_request && contains(fromJSON('["/update-branch", "/ub"]'), github.event.comment.body)
     steps:
       - uses: csm-actions/update-branch-action@latest
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+          aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
           server_repository_name: securefix-demo-server
