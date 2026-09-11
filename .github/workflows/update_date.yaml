@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
+      # Required to assume the AWS IAM role that signs the GitHub App JWT with KMS
+      id-token: write
       contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -18,10 +20,11 @@ jobs:
           echo "$date" > date.txt
           echo "value=$date" >> "$GITHUB_OUTPUT"
 
-      - uses: csm-actions/securefix-action@pr/123
+      - uses: csm-actions/securefix-action@pr/793
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+          aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
           server_repository: securefix-demo-server
           # repository: szksh-lab/securefix-demo-client
           branch: update-date-${{steps.date.outputs.value}}
