@@ -25,6 +25,7 @@ jobs:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
           aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
+          aws_region: ap-northeast-1
           server_repository: securefix-demo-server
           # repository: szksh-lab/securefix-demo-client
           branch: update-date-${{steps.date.outputs.value}}
