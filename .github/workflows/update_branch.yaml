@@ -11,10 +11,6 @@ jobs:
     if: github.event.issue.pull_request && contains(fromJSON('["/update-branch", "/ub"]'), github.event.comment.body)
     steps:
       - uses: csm-actions/update-branch-action@feat/oidc
-        # The action builds its KMS client without a region, and it has no
-        # aws_region input, so the region has to come from the environment.
-        env:
-          AWS_REGION: ap-northeast-1
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
