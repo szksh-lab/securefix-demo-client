@@ -17,7 +17,7 @@ jobs:
 
       - run: echo foo > foo.txt
 
-      - uses: csm-actions/securefix-action@pr/793
+      - uses: csm-actions/securefix-action@latest
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
