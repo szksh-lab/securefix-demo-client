@@ -15,9 +15,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
+      - run: echo fooo > foo.txt
 
-      - uses: csm-actions/securefix-action@latest
+      - uses: csm-actions/securefix-action@pr/795
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
