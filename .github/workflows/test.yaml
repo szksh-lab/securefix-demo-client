@@ -13,7 +13,7 @@ jobs:
       - uses: suzuki-shunsuke/create-github-app-token-aws-kms@latest
         id: token
         with:
-          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          app-id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           role-to-assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
           kms-key-id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
           permission-issues: read
