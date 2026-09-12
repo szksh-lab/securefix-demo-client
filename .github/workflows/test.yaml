@@ -9,20 +9,30 @@ jobs:
     permissions:
       # Required to assume the AWS IAM role that signs the GitHub App JWT with KMS
       id-token: write
-      contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
-
-      - run: echo foo > foo.txt
-
-      - uses: csm-actions/securefix-action@latest
+      - uses: suzuki-shunsuke/create-github-app-token-aws-kms@latest
+        id: token
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
-          aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
-          server_repository: securefix-demo-server
-          branch: test-4
-          pull_request_title: Title
-          pull_request_base_branch: develop
+          role-to-assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+          kms-key-id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
+          permission-issues: read
+
+      - run: gh issue list
+        env:
+          GH_TOKEN: ${{steps.token.outputs.token}}
+      # - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      #   with:
+      #     persist-credentials: false
+
+      # - run: echo foo > foo.txt
+
+      # - uses: csm-actions/securefix-action@latest
+      #   with:
+      #     app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+      #     aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+      #     aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
+      #     server_repository: securefix-demo-server
+      #     branch: test-4
+      #     pull_request_title: Title
+      #     pull_request_base_branch: develop
