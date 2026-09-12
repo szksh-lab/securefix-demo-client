@@ -9,12 +9,15 @@ jobs:
     if: github.event.issue.pull_request && github.event.comment.body == '/approve'
     timeout-minutes: 10
     permissions:
+      # Required to assume the AWS IAM role that signs the GitHub App JWT with KMS
+      id-token: write
       pull-requests: read
       contents: read
     steps:
-      - uses: securefix-action/approve-pr-action@pr/197
+      - uses: csm-actions/approve-pr-action@latest
         with:
           pull_request_number: ${{ github.event.issue.number }}
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          app_private_key: ${{secrets.AUTOFIX_TRIGGER_APP_PRIVATE_KEY}}
+          aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+          aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
           server_repository_name: securefix-demo-server
