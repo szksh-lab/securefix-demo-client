@@ -14,7 +14,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foooo > foo.txt
+      - run: echo foo > foo.txt
 
       - uses: suzuki-shunsuke/commit-action@latest
         with:
