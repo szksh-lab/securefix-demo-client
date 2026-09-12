@@ -10,22 +10,17 @@ jobs:
       # Required to assume the AWS IAM role that signs the GitHub App JWT with KMS
       id-token: write
     steps:
-      - uses: suzuki-shunsuke/create-github-app-token-aws-kms@latest
-        id: token
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-          app-id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
-          role-to-assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
-          kms-key-id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
-          permission-issues: read
+          persist-credentials: false
 
-      - run: gh -R "$GITHUB_REPOSITORY" issue list
-        env:
-          GH_TOKEN: ${{steps.token.outputs.token}}
-      # - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      #   with:
-      #     persist-credentials: false
+      - run: echo foooo > foo.txt
 
-      # - run: echo foo > foo.txt
+      - uses: suzuki-shunsuke/commit-action@latest
+        with:
+          app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
+          aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
+          aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
 
       # - uses: csm-actions/securefix-action@latest
       #   with:
