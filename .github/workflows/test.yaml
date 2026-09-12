@@ -1,7 +1,7 @@
 ---
 name: securefix
 # on: push
-on: workflow_dispatch
+on: pull_request
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -15,14 +15,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: echo foo > foo.txt
+      - run: echo fooo > foo.txt
 
-      - uses: csm-actions/securefix-action@latest
+      - uses: csm-actions/securefix-action@pr/795
         with:
           app_id: ${{vars.AUTOFIX_TRIGGER_APP_ID}}
           aws_role_to_assume: ${{vars.AUTOFIX_TRIGGER_ROLE_TO_ASSUME}}
           aws_kms_key_id: ${{vars.AUTOFIX_TRIGGER_KMS_KEY_ID}}
           server_repository: securefix-demo-server
-          branch: test-4
-          pull_request_title: Title
-          pull_request_base_branch: develop
